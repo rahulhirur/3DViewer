@@ -20,7 +20,7 @@ The following needs to be accomplished to be able to run this on local web serve
 ### Prerequisites
 - Python version `3.11.2`
 
-  The next steps might be optional if you already have an virtual environment.
+  The next steps might be optional if you already have a virtual environment.
   
 - Create a python environment
    ```bash
