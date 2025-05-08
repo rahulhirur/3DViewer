@@ -6,7 +6,7 @@ import numpy as np
 
 
 
-def ply_to_fig(ply_data):
+def ply_to_fig(ply_data, selected_colorscale = 'viridis'):
     """
     Creates a Plotly Figure object for a 3D point cloud from PLY data.
 
@@ -29,7 +29,7 @@ def ply_to_fig(ply_data):
                 marker_config = dict(size=2, color=colors)
             else:
                 # Color by Z-coordinate (height) if no explicit colors
-                marker_config = dict(size=2, color=z, colorscale='viridis', colorbar=dict(title='Z'))
+                marker_config = dict(size=2, color=z, colorscale= selected_colorscale, colorbar=dict(title='Z'))
 
             fig = go.Figure(data=[go.Scatter3d(x=x, y=y, z=z,
                                                mode='markers',
