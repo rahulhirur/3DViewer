@@ -3,7 +3,39 @@ import plotly.graph_objects as go
 import numpy as np
 
 
+def plot_scatter3d(x=None, y=None,z=None, selected_colorscale = 'viridis'):
+     
+    try:
+        if x is None or y is None or z is None:
+            raise ValueError("X, Y, and Z coordinates must be provided.")
+            return None
+        else:
+                
 
+            # Color by Z-coordinate (height) if no explicit colors
+            marker_config = dict(size=2, color=z, colorscale= selected_colorscale, colorbar=dict(title='Z'))
+
+            fig = go.Figure(data=[go.Scatter3d(x=x, y=y, z=z,
+                                                mode='markers',
+                                                marker=marker_config)])
+
+            fig.update_layout(
+                scene=dict(
+                    xaxis_title='X',
+                    yaxis_title='Y',
+                    zaxis_title='Z',
+                    aspectmode='data'  # Adjust as needed
+                ),
+                autosize=False,
+                width=1200,  # Adjust overall width
+                height=800,   # Adjust overall height
+                margin=dict(l=40, r=40, b=40, t=40)  # Adjust margins
+            )
+            return fig
+    
+    except Exception as e:
+        st.error(f"Error creating point cloud figure: {e}")
+        return None
 
 
 def ply_to_fig(ply_data, selected_colorscale = 'viridis'):
@@ -18,18 +50,15 @@ def ply_to_fig(ply_data, selected_colorscale = 'viridis'):
     """
     try:
         if 'vertex' in ply_data:
+
             vertex = ply_data['vertex'].data
+            
             x = vertex['x']
             y = vertex['y']
             z = vertex['z']
 
-            # You might have color information in the PLY file as well
-            if 'red' in vertex.dtype.names and 'green' in vertex.dtype.names and 'blue' in vertex.dtype.names:
-                colors = np.vstack((vertex['red'], vertex['green'], vertex['blue'])).T / 255.0
-                marker_config = dict(size=2, color=colors)
-            else:
-                # Color by Z-coordinate (height) if no explicit colors
-                marker_config = dict(size=2, color=z, colorscale= selected_colorscale, colorbar=dict(title='Z'))
+            # Color by Z-coordinate (height) if no explicit colors
+            marker_config = dict(size=2, color=z, colorscale= selected_colorscale, colorbar=dict(title='Z'))
 
             fig = go.Figure(data=[go.Scatter3d(x=x, y=y, z=z,
                                                mode='markers',
