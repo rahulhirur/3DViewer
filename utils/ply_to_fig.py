@@ -24,7 +24,32 @@ def plot_scatter3d(x=None, y=None,z=None, selected_colorscale = 'viridis'):
                     xaxis_title='X',
                     yaxis_title='Y',
                     zaxis_title='Z',
-                    aspectmode='data'  # Adjust as needed
+                    aspectmode='data',
+                    xaxis=dict(
+                        visible=True, # Ensure X-axis is visible
+                        showbackground=True,
+                        backgroundcolor="rgba(0, 0, 0, 0.05)", # Light background for the grid
+                        gridcolor="lightgrey", # Color of grid lines
+                        linecolor="black", # Color of the axis line
+                        zerolinecolor="black" # Color of the zero line
+                    ),
+                    yaxis=dict(
+                        visible=True, # Ensure Y-axis is visible
+                        showbackground=True,
+                        backgroundcolor="rgba(0, 0, 0, 0.05)",
+                        gridcolor="lightgrey",
+                        linecolor="black",
+                        zerolinecolor="black"
+                    ),
+                    zaxis=dict(
+                        visible=True, # Ensure Z-axis is visible
+                        showbackground=True,
+                        backgroundcolor="rgba(0, 0, 0, 0.05)",
+                        gridcolor="lightgrey",
+                        linecolor="black",
+                        zerolinecolor="black"
+                    )
+                
                 ),
                 autosize=False,
                 width=1200,  # Adjust overall width
